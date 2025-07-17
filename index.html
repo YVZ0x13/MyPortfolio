@@ -1,10 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>CRT Static Boot with Redirect</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="title" content="Vince Michael B. Aquilizan | Portfolio">
+  <meta name="description"
+    content="I’m passionate about web development, game design, and more. Looking forward to creating something great together!">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yvz0x13.github.io/MyPortfolio">
+  <meta property="og:title" content="Vince Michael B. Aquilizan | Portfolio">
+  <meta property="og:description"
+    content="I’m passionate about web development, game design, and more. Looking forward to creating something great together!">
+  <meta property="og:image" content="https://www.shutterstock.com/image-vector/abstract-blue-background-modern-simple-600nw-2474145007.jpg">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://yvz0x13.github.io/MyPortfolio">
+  <meta property="twitter:title" content="Vince Michael B. Aquilizan | Portfolio">
+  <meta property="twitter:description"
+    content="I’m passionate about web development, game design, and more. Looking forward to creating something great together!">
+  <meta property="twitter:image" content="https://www.shutterstock.com/image-vector/abstract-blue-background-modern-simple-600nw-2474145007.jpg">
+
+  <title>LOADING</title>
   <style>
-    html, body {
+    html,
+    body {
       margin: 0;
       padding: 0;
       background: black;
@@ -25,7 +48,8 @@
       transition: opacity 1s ease;
     }
 
-    .content, .logo {
+    .content,
+    .logo {
       position: relative;
       z-index: 1;
       padding: 40px;
@@ -48,143 +72,145 @@
     }
   </style>
 </head>
+
 <body>
 
-<canvas id="static-overlay"></canvas>
+  <canvas id="static-overlay"></canvas>
 
-<div class="content" id="content">
-  <div id="boot-sequence"></div>
-</div>
+  <div class="content" id="content">
+    <div id="boot-sequence"></div>
+  </div>
 
-<div class="logo" id="logo">
-  <h1>YoRHa</h1>
-  <p>For the Glory of Mankind</p>
-</div>
+  <div class="logo" id="logo">
+    <h1>YoRHa</h1>
+    <p>For the Glory of Mankind</p>
+  </div>
 
-<script>
-  const canvas = document.getElementById('static-overlay');
-  const ctx = canvas.getContext('2d');
+  <script>
+    const canvas = document.getElementById('static-overlay');
+    const ctx = canvas.getContext('2d');
 
-  function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-
-  window.addEventListener('resize', resizeCanvas);
-  resizeCanvas();
-
-  let scanY = 0;
-
-  function drawCRTStatic() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    ctx.globalAlpha = 0.5;
-
-    const w = canvas.width;
-    const h = canvas.height;
-    const imageData = ctx.createImageData(w, h);
-    const buffer = imageData.data;
-
-    for (let i = 0; i < buffer.length; i += 4 * 4) {
-      const gray = Math.random() > 0.95 ? 255 : 0;
-      buffer[i] = buffer[i + 1] = buffer[i + 2] = gray;
-      buffer[i + 3] = gray > 0 ? 40 : 0;
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     }
 
-    ctx.putImageData(imageData, 0, 0);
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
 
-    ctx.globalAlpha = 0.5;
-    const gradient = ctx.createLinearGradient(0, scanY, 0, scanY + 30);
-    gradient.addColorStop(0, "transparent");
-    gradient.addColorStop(0.5, "rgba(255,255,255,0.05)");
-    gradient.addColorStop(1, "transparent");
+    let scanY = 0;
 
-    ctx.fillStyle = gradient;
-    ctx.fillRect(0, scanY, w, 30);
+    function drawCRTStatic() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    scanY += 1;
-    if (scanY > h) scanY = 0;
+      ctx.globalAlpha = 0.5;
 
-    ctx.globalAlpha = 1.0;
-  }
+      const w = canvas.width;
+      const h = canvas.height;
+      const imageData = ctx.createImageData(w, h);
+      const buffer = imageData.data;
 
-  function animate() {
-    drawCRTStatic();
-    requestAnimationFrame(animate);
-  }
+      for (let i = 0; i < buffer.length; i += 4 * 4) {
+        const gray = Math.random() > 0.95 ? 255 : 0;
+        buffer[i] = buffer[i + 1] = buffer[i + 2] = gray;
+        buffer[i + 3] = gray > 0 ? 40 : 0;
+      }
 
-  animate();
+      ctx.putImageData(imageData, 0, 0);
 
-  // Boot Sequence
-  const typingSpeed = 10;
-  const lineDelay = 150;
-  const bootTexts = [
-    "LOADING. - BOOTING SYSTEM…",
-    "Commencing System Check",
-    "Memory Unit: Green",
-    "Initializing Tactics Log",
-    "Loading Geographic Data",
-    "Vitals: Green",
-    "Remaining MP: 100%",
-    "Black Box Temperature: Normal",
-    "Black Box Internal Pressure: Normal",
-    "Activating IFF",
-    "Activating FCS",
-    "Initializing Pod Connection",
-    "Launching DBU Setup",
-    "Activating Inertia"
-  ];
+      ctx.globalAlpha = 0.5;
+      const gradient = ctx.createLinearGradient(0, scanY, 0, scanY + 30);
+      gradient.addColorStop(0, "transparent");
+      gradient.addColorStop(0.5, "rgba(255,255,255,0.05)");
+      gradient.addColorStop(1, "transparent");
 
-  const bootSequence = document.getElementById('boot-sequence');
-  const lines = [];
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, scanY, w, 30);
 
-  bootTexts.forEach(() => {
-    const line = document.createElement('div');
-    line.className = 'line';
-    line.textContent = '';
-    bootSequence.appendChild(line);
-    lines.push(line);
-  });
+      scanY += 1;
+      if (scanY > h) scanY = 0;
 
-  let lineIndex = 0;
+      ctx.globalAlpha = 1.0;
+    }
 
-  function typeLine(lineElement, text, charIndex = 0, callback) {
-    if (charIndex <= text.length) {
-      let padding = " ".repeat(text.length - charIndex);
-      lineElement.textContent = text.substring(0, charIndex) + padding;
+    function animate() {
+      drawCRTStatic();
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    // Boot Sequence
+    const typingSpeed = 10;
+    const lineDelay = 150;
+    const bootTexts = [
+      "LOADING. - BOOTING SYSTEM…",
+      "Commencing System Check",
+      "Memory Unit: Green",
+      "Initializing Tactics Log",
+      "Loading Geographic Data",
+      "Vitals: Green",
+      "Remaining MP: 100%",
+      "Black Box Temperature: Normal",
+      "Black Box Internal Pressure: Normal",
+      "Activating IFF",
+      "Activating FCS",
+      "Initializing Pod Connection",
+      "Launching DBU Setup",
+      "Activating Inertia"
+    ];
+
+    const bootSequence = document.getElementById('boot-sequence');
+    const lines = [];
+
+    bootTexts.forEach(() => {
+      const line = document.createElement('div');
+      line.className = 'line';
+      line.textContent = '';
+      bootSequence.appendChild(line);
+      lines.push(line);
+    });
+
+    let lineIndex = 0;
+
+    function typeLine(lineElement, text, charIndex = 0, callback) {
+      if (charIndex <= text.length) {
+        let padding = " ".repeat(text.length - charIndex);
+        lineElement.textContent = text.substring(0, charIndex) + padding;
+        setTimeout(() => {
+          typeLine(lineElement, text, charIndex + 1, callback);
+        }, typingSpeed);
+      } else {
+        callback();
+      }
+    }
+
+    function showNextLine() {
+      if (lineIndex < lines.length) {
+        const line = lines[lineIndex];
+        const text = bootTexts[lineIndex];
+        typeLine(line, text, 0, () => {
+          lineIndex++;
+          setTimeout(showNextLine, lineDelay);
+        });
+      } else {
+        fadeOutAndRedirect();
+      }
+    }
+
+    showNextLine();
+
+    function fadeOutAndRedirect() {
+      document.getElementById('static-overlay').style.opacity = 0;
+      document.getElementById('content').style.opacity = 0;
+      document.getElementById('logo').style.opacity = 0;
+
       setTimeout(() => {
-        typeLine(lineElement, text, charIndex + 1, callback);
-      }, typingSpeed);
-    } else {
-      callback();
+        window.location.href = "home.html"; // Replace with your target URL
+      }, 2000); // Adjust for fade duration
     }
-  }
-
-  function showNextLine() {
-    if (lineIndex < lines.length) {
-      const line = lines[lineIndex];
-      const text = bootTexts[lineIndex];
-      typeLine(line, text, 0, () => {
-        lineIndex++;
-        setTimeout(showNextLine, lineDelay);
-      });
-    } else {
-      fadeOutAndRedirect();
-    }
-  }
-
-  showNextLine();
-
-  function fadeOutAndRedirect() {
-    document.getElementById('static-overlay').style.opacity = 0;
-    document.getElementById('content').style.opacity = 0;
-    document.getElementById('logo').style.opacity = 0;
-
-    setTimeout(() => {
-      window.location.href = "home.html"; // Replace with your target URL
-    }, 2000); // Adjust for fade duration
-  }
-</script>
+  </script>
 
 </body>
+
 </html>
