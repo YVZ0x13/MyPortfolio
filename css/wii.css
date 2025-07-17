@@ -91,3 +91,13 @@
             border-radius: 5px;
             border: 2px solid #555;
         }
+        .floating-element {
+    z-index: 1;
+}
+
+.sectionBody {
+    overflow-y: auto;
+}
+#nav-icons {
+    border: 2px solid red;
+}
