@@ -1,0 +1,93 @@
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+        .sectionBody {
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden; 
+            position: relative;
+        }
+
+        /* Glassmorphism effect for the main tiles */
+        .glass-tile {
+            background: rgba(255, 255, 255, 0.3); /* Translucent white background */
+            backdrop-filter: blur(10px); /* Blur effect */
+            -webkit-backdrop-filter: blur(10px); /* Safari support */
+            border: 1px solid rgba(255, 255, 255, 0.5); /* Light border */
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); /* Subtle shadow */
+        }
+
+        /* Background floating elements (for visual depth) */
+        .floating-element {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border-radius: 1rem; /* Rounded corners */
+            opacity: 0.6;
+            animation: float 15s ease-in-out infinite;
+        }
+
+        /* More varied positions and sizes for floating elements */
+        .floating-element:nth-child(1) { top: 10%; left: 5%; width: 80px; height: 80px; animation-delay: 0s; border-radius: 50%; } /* Circle */
+        .floating-element:nth-child(2) { top: 60%; left: 15%; width: 100px; height: 100px; animation-delay: 2s; }
+        .floating-element:nth-child(3) { top: 20%; right: 10%; width: 120px; height: 120px; animation-delay: 4s; border-radius: 0.5rem; } /* Less rounded */
+        .floating-element:nth-child(4) { bottom: 5%; right: 20%; width: 90px; height: 90px; animation-delay: 6s; border-radius: 50%; } /* Circle */
+        .floating-element:nth-child(5) { top: 40%; left: 30%; width: 70px; height: 70px; animation-delay: 8s; }
+        .floating-element:nth-child(6) { bottom: 15%; left: 5%; width: 110px; height: 110px; animation-delay: 10s; }
+        .floating-element:nth-child(7) { top: 5%; left: 40%; width: 60px; height: 60px; animation-delay: 1s; border-radius: 50%; } /* New element */
+        .floating-element:nth-child(8) { bottom: 25%; right: 5%; width: 130px; height: 70px; animation-delay: 3s; border-radius: 1.5rem; } /* New element, rectangular */
+        .floating-element:nth-child(9) { top: 70%; right: 30%; width: 90px; height: 90px; animation-delay: 5s; } /* New element */
+        .floating-element:nth-child(10) { top: 30%; right: 2%; width: 100px; height: 50px; animation-delay: 7s; border-radius: 0.75rem; } /* New element, rectangular */
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(10px, 20px) rotate(5deg); }
+            50% { transform: translate(0, 0) rotate(0deg); }
+            75% { transform: translate(-10px, -20px) rotate(-5deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+
+        /* Specific styles for the handheld device icon */
+        .handheld-device {
+            width: 80px;
+            height: 40px;
+            background-color: #ff0000; /* Red color */
+            border-radius: 9999px; /* Fully rounded pill shape */
+            position: relative;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .handheld-device::before,
+        .handheld-device::after {
+            content: '';
+            position: absolute;
+            background-color: #c00000; /* Darker red for details */
+            border-radius: 50%;
+        }
+
+        .handheld-device::before {
+            width: 10px;
+            height: 10px;
+            left: 10px;
+        }
+
+        .handheld-device::after {
+            width: 10px;
+            height: 10px;
+            right: 10px;
+        }
+
+        /* Screen part of the handheld device */
+        .handheld-device-screen {
+            width: 40px;
+            height: 25px;
+            background-color: #333; /* Screen color */
+            border-radius: 5px;
+            border: 2px solid #555;
+        }

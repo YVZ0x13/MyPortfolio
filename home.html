@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sky Blue Themed Portfolio</title>
+    <link rel="preload" as="image" href="image/1000001131.jpg">
+    <link rel="preload" as="image" href="image/1000001346-removebg-preview.png">
+    <link rel="preload" as="image" href="image/1000001346.jpg">
+    <link rel="modulepreload" href="https://unpkg.com/vue@3/dist/vue.esm-browser.js">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/snowflake.css" />
+    <link rel="stylesheet" href="css/wii.css" />
+</head>
+
+<body class="bg-sky-900 text-white">
+    <div id="app">
+        <snow></snow>
+        <app-nav @update-section="handleSectionChange"></app-nav>
+        <app-section :current-section="currentSection"></app-section>
+    </div>
+
+    <!-- Vue 3 as module -->
+    <script type="module">
+        import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
+        import navigationBar from './components/nav.js';
+        import snow from './components/snow.js';
+        import appSection from './content/index.js';
+
+        const app = createApp({
+            data() {
+                return {
+                    currentSection: 'home'
+                };
+            },
+            methods: {
+                handleSectionChange(newSection) {
+                    this.currentSection = newSection;
+                },
+                
+            }
+        });
+
+        app.component('app-nav', {
+            ...navigationBar,
+            emits: ['update-section','open_nav','close_nav'],
+            methods: {
+                changeSection(section) {
+                    this.exitMenu()
+                    this.$emit('update-section', section);
+                },
+                displayMenu() {
+            console.log("test")
+            const menu = this.$refs.mobileMenu;
+            menu.classList.remove("-translate-x-full");
+            menu.classList.add("translate-x-0");
+        },
+        exitMenu() {
+            const menu = this.$refs.mobileMenu;
+            menu.classList.remove("translate-x-0");
+            menu.classList.add("-translate-x-full");
+        }
+            }
+        });
+
+        app.component('app-section', {
+            ...appSection,
+            props: ['currentSection']
+        });
+
+        app.component('snow', snow);
+
+        app.mount('#app');
+    </script>
+</body>
+
+</html>

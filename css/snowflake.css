@@ -1,0 +1,17 @@
+.snowflake {
+    position: absolute;
+    top: -10px;
+    color: white;
+    opacity: 0.8;
+    font-size: 1rem;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-10px) rotate(0deg);
+    }
+    100% {
+        transform: translateY(110vh) rotate(360deg);
+    }
+}
