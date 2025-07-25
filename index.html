@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
@@ -14,7 +14,8 @@
   <meta property="og:title" content="Vince Michael B. Aquilizan | Portfolio">
   <meta property="og:description"
     content="I’m passionate about web development, game design, and more. Looking forward to creating something great together!">
-  <meta property="og:image" content="https://www.shutterstock.com/image-vector/abstract-blue-background-modern-simple-600nw-2474145007.jpg">
+  <meta property="og:image"
+    content="https://www.shutterstock.com/image-vector/abstract-blue-background-modern-simple-600nw-2474145007.jpg">
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
@@ -22,195 +23,18 @@
   <meta property="twitter:title" content="Vince Michael B. Aquilizan | Portfolio">
   <meta property="twitter:description"
     content="I’m passionate about web development, game design, and more. Looking forward to creating something great together!">
-  <meta property="twitter:image" content="https://www.shutterstock.com/image-vector/abstract-blue-background-modern-simple-600nw-2474145007.jpg">
+  <meta property="twitter:image"
+    content="https://www.shutterstock.com/image-vector/abstract-blue-background-modern-simple-600nw-2474145007.jpg">
 
-  <title>LOADING</title>
-  <style>
-    html,
-    body {
-      margin: 0;
-      padding: 0;
-      background: black;
-      color: white;
-      font-family: 'Courier New', monospace;
-      height: 100%;
-      overflow: hidden;
-    }
-
-    #static-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      pointer-events: none;
-      z-index: 1000;
-      transition: opacity 1s ease;
-    }
-
-    .content,
-    .logo {
-      position: relative;
-      z-index: 1;
-      padding: 40px;
-      transition: opacity 1s ease;
-    }
-
-    .line {
-      white-space: pre;
-      margin-top: 20px;
-    }
-
-    .logo {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: gray;
-      opacity: 0.2;
-      z-index: 2;
-    }
-  </style>
+  <title>Portfolio Website</title>
+  <link rel="icon" type="image/svg+xml" href="/MyPortfolio/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script type="module" crossorigin src="/MyPortfolio/assets/index-Bsp30u5D.js"></script>
+  <link rel="stylesheet" crossorigin href="/MyPortfolio/assets/index-CQUZNoi6.css">
 </head>
 
-<body>
-
-  <canvas id="static-overlay"></canvas>
-
-  <div class="content" id="content">
-    <div id="boot-sequence"></div>
-  </div>
-
-  <div class="logo" id="logo">
-    <h1>YoRHa</h1>
-    <p>For the Glory of Mankind</p>
-  </div>
-
-  <script>
-    const canvas = document.getElementById('static-overlay');
-    const ctx = canvas.getContext('2d');
-
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-
-    let scanY = 0;
-
-    function drawCRTStatic() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      ctx.globalAlpha = 0.5;
-
-      const w = canvas.width;
-      const h = canvas.height;
-      const imageData = ctx.createImageData(w, h);
-      const buffer = imageData.data;
-
-      for (let i = 0; i < buffer.length; i += 4 * 4) {
-        const gray = Math.random() > 0.95 ? 255 : 0;
-        buffer[i] = buffer[i + 1] = buffer[i + 2] = gray;
-        buffer[i + 3] = gray > 0 ? 40 : 0;
-      }
-
-      ctx.putImageData(imageData, 0, 0);
-
-      ctx.globalAlpha = 0.5;
-      const gradient = ctx.createLinearGradient(0, scanY, 0, scanY + 30);
-      gradient.addColorStop(0, "transparent");
-      gradient.addColorStop(0.5, "rgba(255,255,255,0.05)");
-      gradient.addColorStop(1, "transparent");
-
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, scanY, w, 30);
-
-      scanY += 1;
-      if (scanY > h) scanY = 0;
-
-      ctx.globalAlpha = 1.0;
-    }
-
-    function animate() {
-      drawCRTStatic();
-      requestAnimationFrame(animate);
-    }
-
-    animate();
-
-    // Boot Sequence
-    const typingSpeed = 10;
-    const lineDelay = 150;
-    const bootTexts = [
-      "LOADING. - BOOTING SYSTEM…",
-      "Commencing System Check",
-      "Memory Unit: Green",
-      "Initializing Tactics Log",
-      "Loading Geographic Data",
-      "Vitals: Green",
-      "Remaining MP: 100%",
-      "Black Box Temperature: Normal",
-      "Black Box Internal Pressure: Normal",
-      "Activating IFF",
-      "Activating FCS",
-      "Initializing Pod Connection",
-      "Launching DBU Setup",
-      "Activating Inertia"
-    ];
-
-    const bootSequence = document.getElementById('boot-sequence');
-    const lines = [];
-
-    bootTexts.forEach(() => {
-      const line = document.createElement('div');
-      line.className = 'line';
-      line.textContent = '';
-      bootSequence.appendChild(line);
-      lines.push(line);
-    });
-
-    let lineIndex = 0;
-
-    function typeLine(lineElement, text, charIndex = 0, callback) {
-      if (charIndex <= text.length) {
-        let padding = " ".repeat(text.length - charIndex);
-        lineElement.textContent = text.substring(0, charIndex) + padding;
-        setTimeout(() => {
-          typeLine(lineElement, text, charIndex + 1, callback);
-        }, typingSpeed);
-      } else {
-        callback();
-      }
-    }
-
-    function showNextLine() {
-      if (lineIndex < lines.length) {
-        const line = lines[lineIndex];
-        const text = bootTexts[lineIndex];
-        typeLine(line, text, 0, () => {
-          lineIndex++;
-          setTimeout(showNextLine, lineDelay);
-        });
-      } else {
-        fadeOutAndRedirect();
-      }
-    }
-
-    showNextLine();
-
-    function fadeOutAndRedirect() {
-      document.getElementById('static-overlay').style.opacity = 0;
-      document.getElementById('content').style.opacity = 0;
-      document.getElementById('logo').style.opacity = 0;
-
-      setTimeout(() => {
-        window.location.href = "home.html"; // Replace with your target URL
-      }, 2000); // Adjust for fade duration
-    }
-  </script>
-
+<body class="">
+  <div id="app"></div>
 </body>
 
 </html>
